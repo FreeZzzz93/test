@@ -1,6 +1,4 @@
 pipeline {
-  agent {label 'Built-In Node'}
-
   stages {
     stage('########### Copy from Git ###########') {
       steps {
