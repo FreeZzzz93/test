@@ -1,0 +1,38 @@
+---
+- name: Lesson01 Task1
+  hosts: all
+  become: true
+  tasks:
+
+  - name: Install Apache web-server
+    package:
+      name: "httpd"
+      state: "latest"
+
+  - name: Start and enable httpd service
+    service:
+      name: "httpd"
+      state: "started"
+      enabled: "yes"
+
+  - name: create a file with text
+    copy:
+      content: "Welcome to my web server"
+      dest: /var/www/html/index.html
+      force: no
+      group: root
+      owner: root
+      mode: 0644
+
+  - name: open ports 80 and 443 for service
+    firewalld:
+      service:
+        - http
+        - https
+      permanent: true
+      state: enabled
+
+  - name: Restart firewalld
+    service:
+      name: firewalld
+      state: restarte
