@@ -1,0 +1,22 @@
+pipeline {
+  agent {label 'master'}
+
+  stages {
+    stage('########### Copy from Git ###########') {
+      steps {
+        sh 'cp -r * /home/ruslan/test'         
+        }
+    }
+        stage('########### UP and BUILD ###########') {
+      steps {
+        sh 'ansible-playbook /home/ruslan/test/Task1.yml --syntax-check'    
+        }
+    }
+        stage('########### Check containers status ###########') {
+      steps {
+        sleep 120
+        sh 'ansible-lint /home/ruslan/test/Task1.yml'         
+        }
+    }    
+  }
+}
