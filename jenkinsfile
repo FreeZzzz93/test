@@ -1,5 +1,5 @@
 pipeline {
-  agent {label 'main'}
+  agent {label 'any'}
 
   stages {
     stage('########### Copy from Git ###########') {
