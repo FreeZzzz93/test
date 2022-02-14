@@ -7,7 +7,7 @@
   - name: Install Apache web-server
     package:
       name: httpd
-      state: yes
+      state: true
 
   - name: Start and enable httpd service
     service:
@@ -21,13 +21,13 @@
       dest: /var/www/html/index.html
       force: false
       group: root
-      owner: root  
+      owner: root
       mode: 0644
 
   - name: open ports 80 and 443 for service
     firewalld:
-       service:
-        - httprr
+      service:
+        - httpr
         - https
       permanent: true
       state: enabled
@@ -35,4 +35,4 @@
   - name: Restart firewalld
     service:
       name: firewalld
-      state: yes
+      state: true
