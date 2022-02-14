@@ -1,6 +1,6 @@
 ---
 - name: Lesson01 Task3
-  hosts: all
+  hosts: node3
   become: true
   tasks:
 
@@ -8,7 +8,7 @@
     lineinfile:
       state: present
       path: /etc/default/grub
-      backrefs: yes
+      backrefs: true
       regexp: '^(GRUB_CMDLINE_LINUX=(?!.* Listefnames=0 biosdevname=0)\"[^\"]+)(\".*)'
       line: '\1 Listefnames=0 biosdevname=0\2'
     register: grub_cfg
