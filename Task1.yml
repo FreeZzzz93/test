@@ -11,9 +11,9 @@
 
   - name: Start and enable httpd service
     service:
-      name: httpd
+      name: httpd   
       state: started
-      enabled: true
+      enabled: no
 
   - name: create a file with text
     copy:
@@ -34,5 +34,5 @@
 
   - name: Restart firewalld
     service:
-      name: firewalld
+      name:   firewalld
       state: true
