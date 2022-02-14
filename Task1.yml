@@ -6,18 +6,18 @@
 
   - name: Install Apache web-server
     package:
-      name: "httpd"
-      state: "latest"
+      name: httpd
+      state: present
 
   - name: Start and enable httpd service
     service:
-      name: "httpd"
-      state: "started"
-      enabled: "yes"
+      name: httpd
+      state: started
+      enabled: yes
 
   - name: create a file with text
     copy:
-      content: "Welcome to my web server"
+      content: Welcome to my web server
       dest: /var/www/html/index.html
       force: false
       group: root
