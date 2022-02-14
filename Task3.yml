@@ -1,0 +1,18 @@
+---
+- name: Lesson01 Task3
+  hosts: all
+  become: true
+  tasks:
+
+  - name: Add parameters to Grub
+    lineinfile:
+      state: present
+      path: /etc/default/grub
+      backrefs: yes
+      regexp: '^(GRUB_CMDLINE_LINUX=(?!.* Listefnames=0 biosdevname=0)\"[^\"]+)(\".*)'
+      line: '\1 Listefnames=0 biosdevname=0\2'
+    register: grub_cfg
+
+  - name: Write grub configuration file
+    command: grub2-mkconfig -o /boot/grub2/grub.cfg
+    when: grub_cfg.changed
