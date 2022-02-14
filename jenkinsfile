@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('########### Copy from Git ###########') {
       steps {
-        sh 'yamllint Task1.yml'         
+        sh 'ansible-lint Task1.yml'         
         }
     }
         stage('########### UP and BUILD ###########') {
@@ -15,7 +15,7 @@ pipeline {
         stage('########### Check containers status ###########') {
       steps {
         sleep 120
-        sh 'ansible-lint Task1.yml'         
+        sh 'yamllint Task1.yml'         
         }
     }    
   }
