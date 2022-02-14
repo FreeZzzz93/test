@@ -1,22 +1,14 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('########### Copy from Git ###########') {
-      steps {
-        sh 'ansible-lint Task1.yml'         
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "Hello World"'
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
+            }
         }
     }
-        stage('########### UP and BUILD ###########') {
-      steps {
-        sh 'ansible-playbook Task1.yml --syntax-check'    
-        }
-    }
-        stage('########### Check containers status ###########') {
-      steps {
-        sleep 120
-        sh 'yamllint Task1.yml'         
-        }
-    }    
-  }
 }
