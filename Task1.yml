@@ -1,6 +1,6 @@
 ---
 - name: Lesson01 Task1
-  hosts: all
+  hosts: node1
   become: true
   tasks:
 
