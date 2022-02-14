@@ -19,7 +19,7 @@
     copy:
       content: "Welcome to my web server"
       dest: /var/www/html/index.html
-      force: no
+      force: false
       group: root
       owner: root
       mode: 0644
