@@ -11,8 +11,10 @@
       backrefs: true
       regexp: '^(GRUB_CMDLINE_LINUX=(?!.* Listefnames=0 biosdevname=0)\"[^\"]+)(\".*)'
       line: '\1 Listefnames=0 biosdevname=0\2'
-    register: grub_cfg
+    notify: grub_cfg
 
-  - name: Write grub configuration file
-    command: grub2-mkconfig -o /boot/grub2/grub.cfg
-    when: grub_cfg.changed
+  handlers:
+    - name: grub_cfg
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
