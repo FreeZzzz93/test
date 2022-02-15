@@ -4,12 +4,12 @@ node
  checkout scm
  }  
  stage('YAML lint') {
- sh 'yamllint Task1.yml . || exit 0 && printf "Step one yamllint PASS"'
+ sh 'yamllint Task1.yml || exit 0 && printf "Step one yamllint PASS"'
  }
   stage('Ansible syntax check'){
- sh 'ansible-lint Task1.yml . || exit 0 && printf "Step two ansible-lint PASS"'
+ sh 'ansible-lint Task1.yml || exit 0 && printf "Step two ansible-lint PASS"'
  }
  stage('Ansible syntax check'){
- sh 'ansible-playbook Task1.yml --syntax-check . || exit 0 && printf "Step Three syntax-check PASS"'
+ sh 'ansible-playbook -i hosts Task1.yml --syntax-check || exit 0 && printf "Step Three syntax-check PASS"'
  }
 }
