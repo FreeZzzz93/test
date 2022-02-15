@@ -1,0 +1,12 @@
+node
+{
+ stage ('Clone') {
+ checkout scm
+ }  
+ stage('YAML lint') {
+ sh 'yamllint Task1.yml .'
+ }
+ stage('Ansible syntax check'){
+ sh 'ansible-playbook Task1.yml --syntax-check'
+ }
+}
