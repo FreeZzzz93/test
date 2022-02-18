@@ -1,0 +1,21 @@
+#need generate encreapted password for users
+#python -c 'import crypt; print crypt.crypt("Type here your pass", crypt.mksalt(crypt.METHOD_SHA512))'
+
+---
+- name: Create users on servers
+  hosts: test
+  become: yes
+  vars:
+    users:
+      - username: alice
+      - username: bob
+      - username: carol  
+
+  tasks:
+  - name: Create a login user
+    user:
+      name: "{{ item.username }}"
+      password: '$6$gtpuvbcBxTGhlYHW$8NTMVLKzx3xZ87GxJqQrOXoLaTfkYLEbZBa3DgEVTR/poAm9B5.OATe7xQDyXItXe8KE9SdtyX4vKK4KKWIY/.'
+      state: present
+      comment: '{{ item.username }}@example.com'
+    loop: "{{users}}"

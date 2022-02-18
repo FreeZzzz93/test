@@ -1,0 +1,31 @@
+---
+- name: Remove default Apache
+  hosts: test
+  become: yes
+  
+  vars:
+    service_list:
+      - { service: http, state: disabled }
+      - { service: https, state: disabled }
+
+  tasks:
+    - name: Remove index.html file
+      file: path='/var/www/html/index.html' state=absent
+      #notify: Restart Apache
+
+    - name: yum remove Apache
+      yum: name=httpd state=absent
+    
+    - name: Close firewalld ports
+      firewalld:
+        service: "{{ item.service }}"
+        permanent: true
+        state: "{{ item.state }}"
+      loop: "{{ service_list }}"
+      notify: Restart Firewalld
+  
+  handlers:
+    - name: Restart Apache
+      service: name=httpd state=restarted
+    - name: Restart Firewalld
+      service: name=firewalld state=restarted
