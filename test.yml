@@ -1,0 +1,31 @@
+---
+- hosts: node1
+  gather_facts: yes
+
+  tasks:
+    - name: "Check if APACHE is installed"
+      package_facts:
+        manager: "auto"
+
+    - name: "APACHE test result"
+      debug:
+        msg: "APACHE found"
+      when: "'httpd' in ansible_facts.packages"
+
+    - name: "APACHE test result"
+      debug:
+        msg: "APACHE NOT found"
+      when: "'httpd' not in ansible_facts.packages"
+
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+
+    - name: Stop Service If Running One
+      debug:
+        msg: "HTTPD running OK"
+      when: ansible_facts.services["httpd.service"].state == "running"
+
+    - name: Stop Service If Running One
+      debug:
+        msg: "HTTPD STOP OK"
+      when: ansible_facts.services["httpd.service"].state != "running"
