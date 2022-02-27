@@ -1,2 +1,2 @@
-node1 ansible_host=node1.example.com ansible_user=ruslan ansible_ssh_private_key_file=/home/ruslan/.ssh/id_rsa
+node1 ansible_host=node1.example.com ansible_user=ruslan
 node2 ansible_host=node2.example.com ansible_user=ruslan ansible_ssh_private_key_file=/home/ruslan/.ssh/id_rsa
