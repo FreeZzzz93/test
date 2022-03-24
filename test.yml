@@ -6,7 +6,7 @@
     - name: "Check if APACHE is installed"
       package_facts:
         manager: "auto"
-sdfsdf
+wqeqweqwe
     - name: "APACHE test result"
       debug:
         msg: "APACHE found"
